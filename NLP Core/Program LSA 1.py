@@ -15,3 +15,6 @@ dataset = [line.lower() for line in dataset]
 
 vectorizer = TfidfVectorizer()
 x = vectorizer.fit_transform(dataset)
+
+lsa = TruncatedSVD(n_components = 4, n_iter = 100)
+lsa.fit(x)
