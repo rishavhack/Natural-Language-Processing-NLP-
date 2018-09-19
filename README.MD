@@ -19,3 +19,6 @@ nltk.download()
 * Word representations have meaning.
 * Takes more time than stemming
 * Use lemmatization when meaning of words is important for analysis.Example:Question answering application
+
+# Bag-of-Words Model
+>The bag-of-words model is simple to understand and implement and has seen great success in problems such as language modeling and document classification.
