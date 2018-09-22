@@ -1,7 +1,7 @@
 import nltk
-from nltk.stem import PorterStemmer
-from nltk.stem import WordNetLemmatizer
-from nltk.corpus import stopwords 
+import re
+import heapq
+import numpy as np
 
 paragraph = """Thank you all so very much. Thank you to the Academy. 
                Thank you to all of you in this room. I have to congratulate 
@@ -33,57 +33,32 @@ paragraph = """Thank you all so very much. Thank you to the Academy.
                amazing award tonight. Let us not take this planet for 
                granted. I do not take tonight for granted. Thank you so very much."""
 
+dataSet = nltk.sent_tokenize(paragraph)
 
+for i in range(len(dataSet)):
+    dataSet[i] = dataSet[i].lower()
+    dataSet[i] = re.sub(r'\W',' ',dataSet[i])
+    dataSet[i] = re.sub(r'\s+',' ',dataSet[i])
+    
+word2count = {}
+for data in dataSet:
+    words = nltk.word_tokenize(data)
+    for word in words:
+        if word not in word2count.keys():
+            word2count[word] = 1
+        else:
+            word2count[word] += 1
 
-sentences = nltk.sent_tokenize(paragraph)
+freq_words = heapq.nlargest(100,word2count,key=word2count.get)
 
-
-stemmer = PorterStemmer()
-
-#Stemming
-for i in range(len(sentences)):
-     words = nltk.word_tokenize(sentences[i])
-     newwords = [stemmer.stem(word.decode('utf-8')) for word in words]
-     sentences[i] = ' '.join(newwords)
-
-
-#Lemmatization
-lemSentence = nltk.sent_tokenize(paragraph)
-lemmatizer = WordNetLemmatizer()
-for i in range(len(sentences)):
-     words = nltk.word_tokenize(lemSentence[i])
-     lemnewwords = [lemmatizer.lemmatize(word.decode('utf-8')) for word in words]
-     lemSentence[i] = ' '.join(lemnewwords) 
-
-#Stop Word
-stopSentence = nltk.sent_tokenize(paragraph)
-
-for i in range(len(stopSentence)):
-     words = nltk.word_tokenize(stopSentence[i])
-     stopWordsValue = [word for word in words if word not in stopwords.words('english')]
-     stopSentence[i] = ' '.join(stopWordsValue)
-
-
-#Part of Speech
-partWord = nltk.word_tokenize(paragraph)
-
-tagged_words = nltk.pos_tag(partWord)
-#tagged_words gives the result but the problem
-#is this is in tuple format
-word_tags = []
-for tw in tagged_words:
-     word_tags.append(tw[0]+"_"+tw[1])
-
-tagged_paragraph = ' '.join(word_tags)
-
-
-#Name Entity
-
-paragraphs = """The Taj Mahal was built by Emperor Shah Jahan"""
-
-words = nltk.word_tokenize(paragraphs)
-
-tagged_word = nltk.pos_tag(words)
-
-nameEnt = nltk.ne_chunk(tagged_word)
-nameEnt.draw()
+X = []
+for data in dataSet:
+    vector = []
+    for word in freq_words:
+        if word in nltk.word_tokenize(data):
+            vector.append(1)
+        else:
+            vector.append(0)
+    X.append(vector)
+    
+X = np.asarray(X)
