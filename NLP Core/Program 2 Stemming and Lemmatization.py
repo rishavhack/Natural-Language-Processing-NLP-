@@ -19,5 +19,6 @@ stemmer = PorterStemmer()
 #stemmer
 for i in range(len(sentences)):
 	words = nltk.word_tokenize(sentences[i])
-	newwords = [stemmer.stem(word) for word in words]
+	newwords = [stemmer.stem(word.decode('utf-8')) for word in words]
 	sentences[i] = ' '.join(newwords)
+	print words
