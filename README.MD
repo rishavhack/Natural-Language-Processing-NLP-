@@ -22,3 +22,45 @@ nltk.download()
 
 # Bag-of-Words Model
 >The bag-of-words model is simple to understand and implement and has seen great success in problems such as language modeling and document classification.
+
+
+# TF-IDF Model
+```
+TF = Term Frequency
+IDF = Inverse Document Frequency
+TF-TDF = TF*IDF
+```
+
+```
+# Formula
+Term Frequency = (No. pf occurrences of a word in a document)/(No. of words in that particular document)
+
+Example - "to be or not to be"
+1. to = 1+1/6 =0.33
+2. be = 0.33
+3. or =0.16
+
+
+IDF = log((No.of documents)/(No. of document containing word))
+Example - "to be or not to be"."i have to be"."you got to be"
+1. to = log(3/3) = 0
+2. have = log(3/1) 
+3. be = log(3/3)
+
+```
+
+# N-Gram
+>An N-Gram is a contiguous sequence of n items from a given sample of text or speech.
+>Items refer to states in ***Markov Chains***.Items can be "Characters","Words","sentences" etc
+ ## Example
+ ```
+ N = 2 then bigrams
+ N = 3 then trigrams
+ and so on
+
+ Example - "the bird is flying on the  blue sky"
+ N = 2
+ Bigrams = 'th','he','e ',' b','bi','ir','rd','d ',' i'..etc.
+ N = 3
+ Trigrams = 'the','he ','e b',' bi','bir','ird' etc
+ ```
