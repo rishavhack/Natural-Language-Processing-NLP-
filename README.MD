@@ -57,10 +57,13 @@ Example - "to be or not to be"."i have to be"."you got to be"
  N = 2 then bigrams
  N = 3 then trigrams
  and so on
-
+ 
  Example - "the bird is flying on the  blue sky"
  N = 2
- Bigrams = 'th','he','e ',' b','bi','ir','rd','d ',' i'..etc.
+ Character Bigrams = 'th','he','e ',' b','bi','ir','rd','d ',' i'..etc.
  N = 3
- Trigrams = 'the','he ','e b',' bi','bir','ird' etc
+ Character Trigrams = 'the','he ','e b',' bi','bir','ird' etc
+
+ Word Gram Trigram - 'the bird is', 'bird is flying', 'is flying on' etc
+
  ```
