@@ -1,6 +1,7 @@
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
+import nltk
 
 dataset = ["The amount of polution is increasing day by day",
            "The concert was just great",
@@ -20,12 +21,25 @@ X = vectorizer.fit_transform(dataset)
 lsa = TruncatedSVD(n_components = 4, n_iter = 100)
 lsa.fit(X)
 row1 = lsa.components_[0]
+concept_words ={}
 terms = vectorizer.get_feature_names()
 
 for i,comp in enumerate(lsa.components_):
     componentTerms = zip(terms,comp)
     sortedTerms = sorted(componentTerms,key=lambda x:x[1],reverse=True)
     sortedTerms = sortedTerms[:10]
-    print "\nConcept",i,":"
-    for term in sortedTerms:
-        print term
+    concept_words["Concept "+str(i)] = sortedTerms
+        
+for key in concept_words.keys():
+    sentence_scores = []
+    for sentence in dataset:
+        words = nltk.word_tokenize(sentence)
+        score = 0
+        for word in words:
+            for word_with_Score in concept_words[key]:
+                if word == word_with_Score[0]:
+                    score += word_with_Score[1]
+        sentence_scores.append(score)
+    print "\n"+key+":"
+    for sentence_score in sentence_scores:
+        print sentence_score

@@ -67,3 +67,24 @@ Example - "to be or not to be"."i have to be"."you got to be"
  Word Gram Trigram - 'the bird is', 'bird is flying', 'is flying on' etc
 
  ```
+
+## Latent Semantic Analysis
+>**Latent Semantic Analysis** is a technique of analysing relationships between a set of dcouments and the terms they contain by producing a set of concepts related to the documents and terms.
+
+### SVD(Singular Value decomposition) - Definition
+```
+A[m*n] = U[m*r] * S[r*r] * (V[n*r])^T
+
+* A: Input Data Matrix
+	- m * n matrix (m = number of documents,n = number of words/features)
+* U: Left Singular matrix
+	- m * r matrix (m = number of documents,r = number of concepts)
+* S:Rank Matrix
+	- r * r matrix (r = rank of A)
+* V:Right Singular Matrix
+	- n *r matrix (n = number of words/features, r = number of concepts)
+```
+* Latent Semantic Analysis - Application
+	- Article Bucketing in Websites
+	- Finding relations between articles/words
+	- Page Indexing in Search Engines
