@@ -38,9 +38,3 @@ for i in range(0,len(x)):
 from sklearn.feature_extraction.text import CountVectorizer
 vectorizer = CountVectorizer(max_features=2000,min_df=1,max_df=0.6,stop_words = stopwords.words('english'))
 x = vectorizer.fit_transform(corpus).toarray()
-
-
-#Method to create TFIDF from bOW
-from sklearn.feature_extraction.text import TfidfTransformer
-transformer = TfidfTransformer()
-x = transformer.fit_transform(x).toarray()
