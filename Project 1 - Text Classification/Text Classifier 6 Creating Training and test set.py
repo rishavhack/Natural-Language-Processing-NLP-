@@ -45,15 +45,6 @@ from sklearn.feature_extraction.text import TfidfTransformer
 transformer = TfidfTransformer()
 x = transformer.fit_transform(x).toarray()
 
+#Creating training and test 
 from sklearn.model_selection import train_test_split
 text_train,text_test,sent_train,sent_test = train_test_split(x,y,test_size=0.2,random_state=0)
-
-
-from sklearn.linear_model import LogisticRegression
-classifier = LogisticRegression()
-classifier.fit(text_train,sent_train)
-
-
-sent_pred = classifier.predict(text_test)
-from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(sent_test,sent_pred)
