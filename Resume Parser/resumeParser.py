@@ -3,11 +3,13 @@ from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
 from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
-
+import csv
 import re
+import numpy as np
 import nltk
 import spacy
 from nltk.corpus import stopwords
+import datefinder
 #converts pdf, returns its text content as a string
 def convert(fname, pages=None):
     if not pages:
@@ -86,6 +88,29 @@ def noOfExperienceFinder():
         		if leaf[1] == 'CD':
         			experienced.append(leaf[0] +' '+yearsOrMonths[0])
         return experienced[0]
+
+def technicalSkills():
+    skills = []
+    for word in resume_string1.split(" "):
+        if word in set(your_list[0]):
+            skills.append(word.encode('ascii', 'ignore'))
+    skills1 = list(set(skills))
+    return skills1
+
+def nonTechnical():
+    nontechskills = []
+    for word in resume_string1.split(" "):
+        if word in set(your_list1[0]):
+            nontechskills.append(word.encode('ascii', 'ignore'))
+    nontechskills = set(nontechskills)
+    list5 = list(nontechskills)
+    return list5  
+
+def dob():
+    dob = [];
+    matches = datefinder.find_dates(resume_string1)
+    for match in matches:
+        print match
     
 print "Mobile No -", extract_phone_numbers(resume_string1)
 print "Email Id -",extract_email_addresses(resume_string1)
@@ -98,5 +123,15 @@ lines = [el.strip() for el in resume_string1.split("\n") if len(el)>0]
 lines = [nltk.word_tokenize(el) for el in lines]
 
 print "Experience -",noOfExperienceFinder()
+resume_string3 = resume_string1.replace(',',' ')
 
- 
+with open('techskill.csv', 'rb') as f:
+    reader = csv.reader(f)
+    your_list = list(reader)
+with open('nontechnicalskills.csv', 'rb') as f:
+    reader = csv.reader(f)
+    your_list1 = list(reader)
+
+print "Skills -",technicalSkills()
+print "Non Tec - ",nonTechnical()
+print "Date Of birth",dob()
