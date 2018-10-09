@@ -31,7 +31,7 @@ def convert(fname, pages=None):
     output.close
     return text 
 
-resume_string = convert("resume4.pdf")
+resume_string = convert("resume.pdf")
 resume_string1 = resume_string
 
 def extract_phone_numbers(string):
@@ -107,7 +107,6 @@ def nonTechnical():
     return list5  
 
 def dob():
-    dob = [];
     matches = datefinder.find_dates(resume_string1)
     for match in matches:
         print match
