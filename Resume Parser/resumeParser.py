@@ -31,7 +31,7 @@ def convert(fname, pages=None):
     output.close
     return text 
 
-resume_string = convert("resume.pdf")
+resume_string = convert("resume4.pdf")
 resume_string1 = resume_string
 
 def extract_phone_numbers(string):
@@ -54,7 +54,7 @@ def extract_name(string):
     for ent in doc_2.ents:
         if ent.label_ == "PERSON":
             print('{}'.format(ent))
-            break
+            
         
 def noOfExperienceFinder():
     noOfexperience = []
