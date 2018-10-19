@@ -1,5 +1,7 @@
-from sklearn.navie_bayes import MultinomialNB
-import pandas as pd
-import numpy as np
+import re
+sentence = "I was born in the year 1996"
 
-data = pd.read_csv('spambase.data').as_matrix()
+re.match(r".*",sentence)
+re.match(r".+",sentence)
+
+re.match(r"[a-zA-Z]+",sentence)
